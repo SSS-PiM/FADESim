@@ -1,0 +1,59 @@
+// example for V/2 write to cell (1 2), write voltage is 3V, in 4x4 array.
+
+topString .title twoDArray
+
+// don't use verilog-a module for the cell.
+// topString .hdl 'reram_mod.va' reram_mod
+// use resistance directly for bulding spice code
+useRtypeReRAMCell yes
+
+// each cell has two states, 0 -> 1e6 Omega, 1-> 1e3->Omega
+cellRstates 2 1e6 1e3
+
+// dc mode in spice
+dc
+bottomString .end
+
+arraySize 4 4
+selector no
+
+// wire resistance between nodes
+line_resistance 2.93
+
+// set all cell to 1, setCellR x y state, see reram_mod.va for state's meanings. 
+// -1 match all
+setCellR -1 -1 1
+
+// set cell (0, -1) to 0, -1 match all columns
+setCellR 0 -1 0
+
+
+// print effective voltage of cell (1, 2)
+senseCellV 1 2
+
+// set wordline (left) are used
+setUseLine left -1 
+// set bitline (down) are used
+setUseLine down -1
+
+
+// all left connect to 1.5V
+setLineV left -1 1.5
+
+// target wordline connect to 3V
+setLineV left 1 3
+
+// all downside connect to 1.5V
+setLineV down -1 1.5
+
+// target bitline connect to 0V
+setLineV down 2 0
+
+
+// above defines a V/2 write to cell (5, 6)
+
+// spice code generated to spice.out
+build spice3.out
+
+
+nodebasedGSMethod 1000 1.2 0 yes 1e-8 

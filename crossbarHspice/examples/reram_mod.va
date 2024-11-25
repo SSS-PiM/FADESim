@@ -1,0 +1,19 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module reram_mod(Nt, Nb);
+
+	inout Nt, Nb;
+	electrical Nt, Nb;
+    parameter integer state = 0;
+    parameter real lowState = 1e2;
+    parameter real highState = 1e3;
+
+	analog begin
+
+        if (state)
+            I(Nt, Nb) <+ V(Nt, Nb)/lowState;
+        else
+            I(Nt, Nb) <+ V(Nt, Nb)/highState;
+	end
+endmodule

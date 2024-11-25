@@ -1,0 +1,44 @@
+// this example generates corresponding spice code for the simulation you set.
+// we define many commands to allow users to set up the simulation easily 
+// and generate the spice code rather than write the spice code one line by one line.
+
+topString .title twoDArray
+
+// use verilog-a module for the cell.
+// you can define a non-linear cell module in verilog-a
+topString .hdl 'reram_mod.va' reram_mod
+
+// dc mode in spice
+dc
+bottomString .end
+
+arraySize 2 2
+selector no
+
+// wire resistance between nodes
+line_resistance 2.93
+
+// set all cell to 1, setCellR x y state, see reram_mod.va for state's meanings. 
+// -1 match all
+setCellR -1 -1 1
+
+// set cell (0, 0) to 0
+setCellR 0 0 0
+
+// print bitline output current 
+// senseBitlineI down x, x means the x-th column, -1 match all
+senseBitlineI down -1
+
+// set wordline (left) are used
+setUseLine left -1 
+// set bitline (down) are used
+setUseLine down -1
+
+// set left wordline are all connected to voltage 1.
+setLineV left -1 1
+// set downside bitline are all connected to voltage zero.
+setLineV down -1 0
+
+// spice code generated to spice.out
+build spice1.out
+

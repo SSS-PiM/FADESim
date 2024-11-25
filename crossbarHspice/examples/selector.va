@@ -1,0 +1,21 @@
+module Selector (
+    input electrical Nt, 
+    input electrical Nb
+);
+
+    parameter real Vth = 1.2 from (0:inf);
+    parameter real g = 0.6;
+    parameter real p = 4;
+
+    analog begin
+        
+        if (V(Nt, Nb)>0)
+            I(Nt, Nb) <+ g*exp((V(Nt, Nb)-Vth)*p);
+        else if (V(Nt, Nb)<0)
+            I(Nb, Nt) <+ g*exp((V(Nb, Nt)-Vth)*p);
+        else 
+            I(Nt, Nb) <+ 0; 
+    end
+
+
+endmodule
