@@ -7,7 +7,7 @@ to fade (i.e., lose its functionality). Therefore, FADESIM denotes simulations t
 
 The non-idealities supported include **IR-drop, IV non-linearity, c2c varation, noises, and etc..**
 
-If you can this work usefule, please cite (currently is early accessed):
+If you find this work useful, please cite (currently is early accessed):
 
 Wu, Bing, Yibo Liu, Jinpeng Liu, Huan Cheng, Xueliang Wei, Wei Tong, and Dan Feng. "FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Non-idealities." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (2024).
 
@@ -41,7 +41,7 @@ Our Fast simluation method and some other fast simulation method are also includ
 
 ### Configuration File Format
 You should configure your file like the following format.
-This is an example for 128x128 array simulation with input all 1 to the wordline, and sense the output current on all bitline. Cell is 2 bits with resisatnce 2e6 1.6e6 1.3e6 1e6.
+This is an example for 128x128 array simulation with input all 1 to the wordline, and sense the output current on all bitline. Cell is 2 bits with resistance 2e6 1.6e6 1.3e6 1e6.
 ```
 topString .title twoDArray
 useRtypeReRAMCell yes
@@ -76,20 +76,25 @@ build spice.out
 // start our fast simluation method
 nodebasedGSMethod 100000 1.95 0 yes 1e-8
 ```
+
+The results of Fast simluation method will print directly.
+SPICE code will generated into spice.out.
+Then you need to use hspice or ngspice to simulate the spice.out like ```hspice spice.out``` or ```ngspice -b spice.out```.
+
 More examples and descriptions about configuration format: see our example config in the dir crossbarHspice/examples.
+
+In crossbarHpsice/tests, there are some scripts to help you to do fast comparison for different simulation methods. You should use them after you have known how to do the basic simluations.
 
 
 ## PimTorch
 This is used to do the algorithm-level simuation.
-Being prepared. Wait fews day.
 
 ### Usage
   1. pytorch, scipy, and etc.. should be installed (conda recommanded). If you see you lack some libs when running, just conda install them. 
-  2. ```cd pimtorch && python3 mnist_ir_drop.py --train // train is done without any non-idealities, just to get the model weight```
-  3. ```python3 mnist_ir_drop.py // inference is done with idealities```
+  2. ```cd pimtorch && python3 mnist_ir_drop.py --train // train is done without any non-idealities, just to get the model weight. An inference with non-idealities is followed at last.```
+  3. ```python3 mnist_ir_drop.py // inference is done with non-idealities```
+
 All our configurations about cell/array/simluation method/weight and etc., are in pimtorch/pimfixedpoint/fixedPoint/nn/commonConst.py.
-
-
 
 
  
