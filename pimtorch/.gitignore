@@ -1,0 +1,11 @@
+**/log/
+*.log
+**/__pycache__/
+**/data/
+**/model/
+**/.vscode/
+**/.idea/
+**/build/
+**/data/
+**/cmake-build-debug-wsl/
+**/.tags

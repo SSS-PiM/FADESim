@@ -8,6 +8,7 @@ topString .title twoDArray
 // topString .hdl 'reram_mod.va' reram_mod
 // use resistance directly for bulding spice code
 useRtypeReRAMCell yes
+topString .OPTIONS  numdgt=10
 
 // each cell has two states, 0 -> 1e6 Omega, 1-> 1e3->Omega
 cellRstates 2 1e6 1e3
@@ -47,10 +48,10 @@ setLineV down -1 0
 build spice2.out
 
 // use our fast simulation method Gauss-Seidel.
-// nodebasedGSMethod iter_time omega 0  enable_break  break_thres
-// a better omega results in less simulation time.
-// use tests/print_best_omega.py to get best omega frist.
-// see our paper why omega is important.
+// nodebasedGSMethod iter_time omega(w) 0  enable_break  break_thres
+// a better omega(w) results in less simulation time.
+// use tests/print_best_omega.py to get best omega(w) frist.
+// see our paper why omega(w) is important.
 // see code in 2darray.cc for details setting
 nodebasedGSMethod 1000 1.2 0 yes 1e-8
 

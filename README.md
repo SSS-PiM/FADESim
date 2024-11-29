@@ -5,6 +5,26 @@ see https://doi.org/10.1109/TCAD.2024.3485589 for details.
 The term FADE in FADESIM has a dual meaning. It refers to non-idealities that decrease computational accuracy and reliability, causing MA
 to fade (i.e., lose its functionality). Therefore, FADESIM denotes simulations that consider non-idealities.
 
+The non-idealities supported include **IR-drop, IV non-linearity, c2c varation, noises, and etc..**
+
+If you can this work usefule, please cite (currently is early accessed):
+
+Wu, Bing, Yibo Liu, Jinpeng Liu, Huan Cheng, Xueliang Wei, Wei Tong, and Dan Feng. "FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Non-idealities." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (2024).
+
+
+Bibtex is:
+```
+@article{wu2024fadesim,
+  title={FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Non-idealities},
+  author={Wu, Bing and Liu, Yibo and Liu, Jinpeng and Cheng, Huan and Wei, Xueliang and Tong, Wei and Feng, Dan},
+  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems},
+  year={2024},
+  publisher={IEEE}
+}
+```
+
+
+
 Our code consists of two parts:
 1. crossbarHspice, for single crossbar array simulation (by SPICE, our fast simulation method, or other fast simluation method).
 2. Pimtorch, for algorithm-level simulation using pytorch, which intergates our array-level fast simluation method. 
@@ -14,16 +34,49 @@ This is used to generate spice code for single crossbar simulation.
 Our Fast simluation method and some other fast simulation method are also included.
 
 ### Usage
-  - cd crossbarHspice && mkdir build && cd build 
-  - cmake ..
+  - ```cd crossbarHspice && mkdir build && cd build```
+  - ```cmake .. && make -j```
   - A excutable file named "sim" will be created.
-  - ./sim ${conf_file}
+  - ```./sim ${conf_file}```
 
 ### Configuration File Format
 You should configure your file like the following format.
+This is an example for 128x128 array simulation with input all 1 to the wordline, and sense the output current on all bitline. Cell is 2 bits with resisatnce 2e6 1.6e6 1.3e6 1e6.
+```
+topString .title twoDArray
+useRtypeReRAMCell yes
+cellRstates 4 2e6 1.6e6 1.3e6 1e6
+bottomString .end
 
+topString .OPTIONS  numdgt=10
 
-More examples about configuration format: see our example config in the dir crossbarHspice/examples.
+arraySize 128 128
+selector no
+line_resistance 2.93
+
+// set all cell to state_2 (1.3e6)
+setCellR -1 -1 2
+
+// set wordline (left) are used
+setUseLine left -1 
+// set bitline (down) are used
+setUseLine down -1
+
+// all left connect to 1V
+setLineV left -1 1
+
+// all down connect to 0V (ground)
+setLineV down -1 0
+
+senseBitlineI down -1
+
+// spice code generated to spice.out
+build spice.out
+
+// start our fast simluation method
+nodebasedGSMethod 100000 1.95 0 yes 1e-8
+```
+More examples and descriptions about configuration format: see our example config in the dir crossbarHspice/examples.
 
 
 ## PimTorch
@@ -31,6 +84,10 @@ This is used to do the algorithm-level simuation.
 Being prepared. Wait fews day.
 
 ### Usage
+  1. pytorch, scipy, and etc.. should be installed (conda recommanded). If you see you lack some libs when running, just conda install them. 
+  2. ```cd pimtorch && python3 mnist_ir_drop.py --train // train is done without any non-idealities, just to get the model weight```
+  3. ```python3 mnist_ir_drop.py // inference is done with idealities```
+All our configurations about cell/array/simluation method/weight and etc., are in pimtorch/pimfixedpoint/fixedPoint/nn/commonConst.py.
 
 
 

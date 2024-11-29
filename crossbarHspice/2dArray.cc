@@ -2040,25 +2040,25 @@ void array2D::buildSpice(string file)
         }
     }
 
-    if (dc_ac_tran_type=="dc")
-    {
-        auto arch = *gen.getArch();
-        for (auto i : arch)
-        {
-            if (i.getType()==UnitType::voltage || i.getType()==UnitType::voltage_pp)
-            {
-                if (i.getType()==UnitType::voltage_pp)
-                {
-                    cout << "Error: dc should use voltage, not voltage_pp" << endl;
-                    throw 0;
-                }
+    // if (dc_ac_tran_type=="dc")
+    // {
+    //     auto arch = *gen.getArch();
+    //     for (auto i : arch)
+    //     {
+    //         if (i.getType()==UnitType::voltage || i.getType()==UnitType::voltage_pp)
+    //         {
+    //             if (i.getType()==UnitType::voltage_pp)
+    //             {
+    //                 cout << "Error: dc should use voltage, not voltage_pp" << endl;
+    //                 throw 0;
+    //             }
 
-                auto paras = i.getParas();
-                gen.push2bot_top(".dc V1 "+paras[0]+" "+paras[0]+" 0.1");
-                break;
-            }
-        }       
-    }
+    //             auto paras = i.getParas();
+    //             gen.push2bot_top(".dc V1 "+paras[0]+" "+paras[0]+" 0.1");
+    //             break;
+    //         }
+    //     }       
+    // }
 
     cout << "build over; start print to spice" << endl; 
     ofstream out(file);

@@ -8,6 +8,8 @@ topString .title twoDArray
 // you can define a non-linear cell module in verilog-a
 topString .hdl 'reram_mod.va' reram_mod
 
+topString .OPTIONS  numdgt=10
+
 // dc mode in spice
 dc
 bottomString .end
