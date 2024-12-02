@@ -1,9 +1,9 @@
 # FADESim
-FADESim: Fast and Accurate Design Exploration for realistic Memristive Accelerators (MAs) considering non-idealities.
+FADESim: Enable <u>F</u>ast and <u>A</u>ccurate <u>D</u>esign <u>E</u>xploration for Memristive Accelerators (MAs) considering non-idealities.
 see https://doi.org/10.1109/TCAD.2024.3485589 for details.
 
 The term FADE in FADESIM has a dual meaning. It refers to non-idealities that decrease computational accuracy and reliability, causing MA
-to fade (i.e., lose its functionality). Therefore, FADESIM denotes simulations that consider non-idealities.
+to fade (i.e., lose its functionality). Therefore, FADESIM denotes realistic MA's simulations that consider non-idealities.
 
 The non-idealities supported include **IR-drop, IV non-linearity, c2c varation, noises, and etc..**
 
