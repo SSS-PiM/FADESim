@@ -7,20 +7,22 @@ to fade (i.e., lose its functionality). Therefore, FADESIM denotes realistic MA'
 
 The non-idealities supported include **IR-drop, IV non-linearity, c2c varation, noises, and etc..**
 
-If you find this work useful, please cite (currently is early accessed):
+If you find this work useful, please cite:
 
-Wu, Bing, Yibo Liu, Jinpeng Liu, Huan Cheng, Xueliang Wei, Wei Tong, and Dan Feng. "FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Non-idealities." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (2024).
-
+Wu, Bing, Yibo Liu, Jinpeng Liu, Huan Cheng, Xueliang Wei, Wei Tong, and Dan Feng. "FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Nonidealities," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 44, no. 4, pp. 1529-1543, April 2025.
 
 Bibtex is:
 ```
 @article{wu2024fadesim,
-  title={FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Non-idealities},
   author={Wu, Bing and Liu, Yibo and Liu, Jinpeng and Cheng, Huan and Wei, Xueliang and Tong, Wei and Feng, Dan},
-  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems},
-  year={2024},
+  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems}, 
+  title={FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Nonidealities}, 
+  year={2025},
+  volume={44},
+  number={4},
+  pages={1529-1543},
   publisher={IEEE}
-}
+ }
 ```
 
 
