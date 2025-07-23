@@ -51,7 +51,7 @@ setLineV down -1 1.5
 setLineV down 2 0
 
 
-// above defines a V/2 write to cell (5, 6)
+// above defines a V/2 write to cell (1, 2)
 
 // spice code generated to spice.out
 build spice3.out

@@ -75,28 +75,39 @@ senseBitlineI down -1
 // spice code generated to spice.out
 build spice.out
 
-// start our fast simluation method
+// start our fast simulation method
 nodebasedGSMethod 100000 1.95 0 yes 1e-8
 ```
 
-The results of Fast simluation method will print directly.
+The results of Fast simulation method will print directly.
 SPICE code will generated into spice.out.
 Then you need to use hspice or ngspice to simulate the spice.out like ```hspice spice.out``` or ```ngspice -b spice.out```.
 
 More examples and descriptions about configuration format: see our example config in the dir crossbarHspice/examples.
 
-In crossbarHpsice/tests, there are some scripts to help you to do fast comparison for different simulation methods. You should use them after you have known how to do the basic simluations.
+In crossbarHpsice/tests, there are some scripts to help you to do fast comparison for different simulation methods. You should use them after you have known how to do the basic simulations.
+
+### CrossbarHspice version 2
+We update the code to V2 in the folder "crossbarHspice/V2". Compared to V1, V2 has a clearer design, making it easier to add new commands in the future.
+Now all support for SPICE simulation has been implemented in V2 as similar in V1.
+But for fast simulation methods, only our own GS method (Au algorithm in our paper) has been implemented. Other fast simulation methods should use V1 version.
+
+#### Usage
+  - ```cd crossbarHspice/V2 && mkdir build && cd build```
+  - ```cmake .. && make -j```
+  - A excutable file named "sim" will be created.
+  - ```./sim ${conf_file}```
 
 
 ## PimTorch
-This is used to do the algorithm-level simuation.
+This is used to do the algorithm-level simulation.
 
 ### Usage
   1. pytorch, scipy, and etc.. should be installed (conda recommanded). If you see you lack some libs when running, just conda install them. 
   2. ```cd pimtorch && python3 mnist_ir_drop.py --train // train is done without any non-idealities, just to get the model weight. An inference with non-idealities is followed at last.```
   3. ```python3 mnist_ir_drop.py // inference is done with non-idealities```
 
-All our configurations about cell/array/simluation method/weight and etc., are in pimtorch/pimfixedpoint/fixedPoint/nn/commonConst.py.
+All our configurations about cell/array/simulation method/weight and etc., are in pimtorch/pimfixedpoint/fixedPoint/nn/commonConst.py.
 
 
  
