@@ -1,2 +1,2 @@
 # FADESim
-This was the repository for [TCAD]FADESIM: Enable Fast and Accurate Design Exploration for Memristive Accelerators Considering Nonidealities
+Hi. The code of FADESim has been transfered to [https://github.com/hust-aims/FADESim](https://github.com/hust-aims/FADESim).
